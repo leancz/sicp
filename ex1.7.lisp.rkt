@@ -4,7 +4,9 @@
 (define (change-in-precision guess x)
   (- (average guess (/ x guess)) guess ))
 
+
 (define (sqrt guess x)
-  (if (< (abs (change-in-precision guess x)) (/ 0.00000001 guess))
-      guess
-      (sqrt (+ guess (change-in-precision guess x)) x)))
+  (let ([delta (change-in-precision guess x)])
+    (if (< (abs delta) (/ 0.000000001 guess))
+        guess
+        (sqrt (+ guess delta) x))))
